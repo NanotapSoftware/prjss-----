@@ -139,7 +139,7 @@ async def ban(ctx, member : discord.Member, *, reason = None):
 
 @bot.command(pass_context=True)
 async def re(ctx):
-    await channel.send(file=discord.File('raspis1.png', 'raspis2.png'))
+    await ctx.send(file=discord.File('raspis1.png', 'raspis2.png'))
 
 
 
