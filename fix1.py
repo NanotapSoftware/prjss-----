@@ -128,7 +128,7 @@ async def clear(ctx, amount=5):
 @commands.has_permissions(administrator = True)
 async def ban(ctx, member : discord.Member, *, reason = None):
     await member.ban(reason = reason)
-№
+
 
 #The below code unbans player.
 @client.command()
