@@ -76,7 +76,7 @@ cls();
 
 
 #-------------------------------------------------------------------------------------------------------------------------------
-
+bot_prefix = "180!"
 
 #help
 @bot.command(aliases = ['help', 'HELP', 'Help', 'hELP', 'хелп', 'ХЕЛП', 'хЕЛП', 'Хелп', 'Хэлп', 'хЭЛП', 'ХЭЛП', 'хэлп'])
@@ -103,11 +103,11 @@ async def notif(ctx, *, args, amount = 1):
 @commands.has_permissions(administrator = True)
 async def ad_help(ctx, amount = 1):
     embed=discord.Embed(title="Помощь по боту", description="👇Полный список команд для администратора 👇", color=0x20accf)
-    embed.add_field(name=f"{command_prefix}help", value="Показывает данное окно", inline=False)
-    embed.add_field(name=f"{command_prefix}ad_help", value="Показывает данное окно", inline=False)
-    embed.add_field(name=f"{command_prefix}notif", value="Создать уведомление для учеников", inline=False)
-    embed.add_field(name=f"{command_prefix}clear", value="Отчистить чат", inline=False)
-    embed.set_footer(text=f"{command_prefix}Это ещё ранняя версия бота, он будет дорабатываться по мере необходимости")
+    embed.add_field(name=f"{bot_prefix}help", value="Показывает данное окно", inline=False)
+    embed.add_field(name=f"{bot_prefix}ad_help", value="Показывает данное окно", inline=False)
+    embed.add_field(name=f"{bot_prefix}notif", value="Создать уведомление для учеников", inline=False)
+    embed.add_field(name=f"{bot_prefix}clear", value="Отчистить чат", inline=False)
+    embed.set_footer(text="Это ещё ранняя версия бота, он будет дорабатываться по мере необходимости")
     await ctx.channel.purge(limit = amount);
     await ctx.send(embed=embed)
 #end
@@ -124,14 +124,14 @@ async def clear(ctx, amount=5):
 
 
 #ban
-@bot.command(pass_context=True)
+@client.command()
 @commands.has_permissions(administrator = True)
 async def ban(ctx, member : discord.Member, *, reason = None):
     await member.ban(reason = reason)
-
+№
 
 #The below code unbans player.
-@bot.command(pass_context=True)
+@client.command()
 @commands.has_permissions(administrator = True)
 async def unban(ctx, *, member):
     banned_users = await ctx.guild.bans()
