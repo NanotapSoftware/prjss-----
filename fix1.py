@@ -1,5 +1,7 @@
 import discord
 from discord.ext import commands
+import io
+import aiohttp
 #other imports
 import random
 import os
@@ -107,6 +109,8 @@ async def ad_help(ctx, amount = 1):
     embed.add_field(name=f"{bot_prefix}ad_help", value="Показывает данное окно", inline=False)
     embed.add_field(name=f"{bot_prefix}notif", value="Создать уведомление для учеников", inline=False)
     embed.add_field(name=f"{bot_prefix}clear", value="Отчистить чат", inline=False)
+    embed.add_field(name=f"{bot_prefix}ban", value="Заблокировать пользователя", inline=False)
+    embed.add_field(name=f"{bot_prefix}unban", value="Разблокировать пользователя", inline=False)
     embed.set_footer(text="Это ещё ранняя версия бота, он будет дорабатываться по мере необходимости")
     await ctx.channel.purge(limit = amount);
     await ctx.send(embed=embed)
@@ -124,14 +128,22 @@ async def clear(ctx, amount=5):
 
 
 #ban
-@bot.command()
+@client.command()
 @commands.has_permissions(administrator = True)
 async def ban(ctx, member : discord.Member, *, reason = None):
     await member.ban(reason = reason)
 
 
+
+async with aiohttp.ClientSession() as session:
+    async with session.get(my_url) as resp:
+        if resp.status != 200:
+            return await channel.send('Could not download file...')
+        data = io.BytesIO(await resp.read())
+        await channel.send(file=discord.File(data, 'raspis1.png', 'raspis2.png'))
+
 #The below code unbans player.
-@bot.command()
+@client.command()
 @commands.has_permissions(administrator = True)
 async def unban(ctx, *, member):
     banned_users = await ctx.guild.bans()
