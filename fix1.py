@@ -135,12 +135,13 @@ async def ban(ctx, member : discord.Member, *, reason = None):
 
 
 
-async with aiohttp.ClientSession() as session:
-    async with session.get(my_url) as resp:
-        if resp.status != 200:
-            return await channel.send('Could not download file...')
-        data = io.BytesIO(await resp.read())
-        await channel.send(file=discord.File(data, 'raspis1.png', 'raspis2.png'))
+
+
+@client.command()
+async def re(ctx):
+    await channel.send(file=discord.File('raspis1.png', 'raspis2.png'))
+
+
 
 #The below code unbans player.
 @client.command()
